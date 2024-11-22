@@ -47,7 +47,7 @@ fun SearchComponent(
         placeholder = {
             Text(
                 stringResource(R.string.search_component_hint),
-                color = WeatherAppTheme.colors.textColor,
+                color = WeatherAppTheme.colors.textLightColor,
                 style = WeatherAppTheme.typography.labelSmall
             )
         }
@@ -58,7 +58,7 @@ fun SearchComponent(
 fun DefaultSearchComponentIcon() {
     Icon(
         painterResource(R.drawable.ic_search),
-        tint = WeatherAppTheme.colors.textColor,
+        tint = WeatherAppTheme.colors.textLightColor,
         contentDescription = "SearchComponentIcon"
     )
 }

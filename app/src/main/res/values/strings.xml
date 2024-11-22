@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">WheatherApp</string>
 
+    <!-- HomeScreen -->
+    <string name="home_screen_idle_title">No City Selected</string>
+    <string name="home_screen_idle_description">Please Search For A City</string>
+
 
 </resources>

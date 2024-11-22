@@ -15,19 +15,19 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
 
     private val searchText = MutableStateFlow("")
     private val weatherData =
-        MutableStateFlow<SubmitLoadingState<String>>(SubmitLoadingState.Loading)
+        MutableStateFlow<SubmitLoadingState<String>>(SubmitLoadingState.Idle)
 
     val state = searchText.combine(weatherData) { searchText, weatherData ->
         HomeScreenState(
             searchText = searchText,
-            weatherData = weatherData
+            weatherDataSubmittable = weatherData
         )
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),
         HomeScreenState(
             searchText = "",
-            weatherData = SubmitLoadingState.Idle
+            weatherDataSubmittable = SubmitLoadingState.Idle
         )
     )
 

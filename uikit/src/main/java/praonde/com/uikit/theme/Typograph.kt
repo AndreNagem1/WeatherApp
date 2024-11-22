@@ -36,14 +36,14 @@ internal val AppTypographyConst = AppTypography(
     ),
     displayMedium = TextStyle(
         fontFamily = Poppins,
-        fontWeight = FontWeight.Normal,
-        fontSize = 42.sp,
-        lineHeight = 52.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 30.sp,
+        lineHeight = 45.sp,
     ),
     displaySmall = TextStyle(
         fontFamily = Poppins,
-        fontWeight = FontWeight.Normal,
-        fontSize = 33.sp,
-        lineHeight = 44.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 15.sp,
+        lineHeight = 22.5.sp,
     ),
 )

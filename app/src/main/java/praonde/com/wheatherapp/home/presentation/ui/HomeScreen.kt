@@ -23,5 +23,7 @@ fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
             value = state.value.searchText,
             onValueChange = viewmodel::onSearchTextChange
         )
+
+        HomeScreenContent(state = state.value.weatherDataSubmittable)
     }
 }
