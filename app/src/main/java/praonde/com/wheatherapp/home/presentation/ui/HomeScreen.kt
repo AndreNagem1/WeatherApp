@@ -1,6 +1,5 @@
 package praonde.com.wheatherapp.home.presentation.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
@@ -38,7 +36,7 @@ fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
             WeatherStatusRow()
         } else {
             HomeScreenContent(
-                state = state.value.weatherDataSubmittable,
+                state = state.value.weatherDataLoadingEvent,
                 onSearchItemClick = { _ ->
                     viewmodel.onSearchItemClick()
                     focusManager.clearFocus()

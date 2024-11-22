@@ -23,7 +23,16 @@ import praonde.com.uikit.theme.WeatherAppTheme
 import praonde.com.wheatherapp.R
 
 @Composable
-fun SearchListItem(onSearchListItemClick: () -> Unit) {
+fun SearchListItem(
+    placeName: String,
+    onSearchListItemClick: () -> Unit
+) {
+    val placeNameFormatted = if(placeName.length > 13){
+        placeName.substring(0, 10) + "..."
+    }else {
+        placeName
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +49,7 @@ fun SearchListItem(onSearchListItemClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             SearchListItemFirstComponent(
-                title = "Mombai",
+                title = placeNameFormatted,
                 value = "20°"
             )
             Spacer(modifier = Modifier.weight(1F))

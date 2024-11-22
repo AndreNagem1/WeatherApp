@@ -7,8 +7,9 @@ import retrofit2.http.Query
 
 interface WeatherService {
 
-    @GET
+    @GET("search.json")
     suspend fun getAvailableLocations(
-        @Query("q") searchText: String
+        @Query("key") apiKey: String,
+        @Query("q") searchText: String,
     ): Response<List<PlaceEntity>>
 }

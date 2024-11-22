@@ -5,33 +5,33 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import praonde.com.wheatherapp.common.SubmitLoadingState
+import kotlinx.coroutines.launch
+import praonde.com.wheatherapp.common.LoadingEvent
+import praonde.com.wheatherapp.home.data.entity.PlaceEntity
 import praonde.com.wheatherapp.home.domain.WeatherRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(private val repository: WeatherRepository) : ViewModel() {
+class HomeScreenViewModel @Inject constructor(private val repository: WeatherRepository) :
+    ViewModel() {
 
     private val showWeatherDetails = MutableStateFlow(false)
     private val searchText = MutableStateFlow("")
-    private val weatherData =
-        MutableStateFlow<SubmitLoadingState<String>>(SubmitLoadingState.Idle)
+    private val weatherDataLoadingEvent =
+        MutableStateFlow<LoadingEvent<List<PlaceEntity>>>(LoadingEvent.Idle)
 
     val state = combine(
         searchText,
-        weatherData,
+        weatherDataLoadingEvent,
         showWeatherDetails
     ) { searchText, weatherDataValue, showWeatherDetails ->
 
-        if (searchText.isNotBlank()) {
-            weatherData.value = SubmitLoadingState.Success("")
-        }
-
         HomeScreenState(
             searchText = searchText,
-            weatherDataSubmittable = if (searchText.isEmpty()) SubmitLoadingState.Idle else weatherDataValue,
+            weatherDataLoadingEvent = if (searchText.isEmpty()) LoadingEvent.Idle else weatherDataValue,
             showWeatherDetails = showWeatherDetails
         )
 
@@ -40,7 +40,7 @@ class HomeScreenViewModel @Inject constructor(private val repository: WeatherRep
         SharingStarted.WhileSubscribed(),
         HomeScreenState(
             searchText = "",
-            weatherDataSubmittable = SubmitLoadingState.Idle,
+            weatherDataLoadingEvent = LoadingEvent.Idle,
             showWeatherDetails = false
         )
     )
@@ -48,6 +48,13 @@ class HomeScreenViewModel @Inject constructor(private val repository: WeatherRep
     fun onSearchTextChange(newText: String) {
         searchText.value = newText
         showWeatherDetails.value = false
+
+        viewModelScope.launch {
+            repository.getSearchPlaces(searchText = newText)
+                .collectLatest { response ->
+                    weatherDataLoadingEvent.value = response
+                }
+        }
     }
 
     fun onSearchItemClick() {

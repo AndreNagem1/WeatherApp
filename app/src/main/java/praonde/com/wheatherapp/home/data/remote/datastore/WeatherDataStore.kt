@@ -14,7 +14,10 @@ class WeatherDataStore @Inject constructor(private val weatherService: WeatherSe
     fun getAvailableLocations(searchText: String): Flow<LoadingEvent<List<PlaceEntity>>> {
         return flow {
             emit(LoadingEvent.Loading)
-            val response = weatherService.getAvailableLocations(searchText)
+            val response = weatherService.getAvailableLocations(
+                apiKey = "fa0f9c023c094469b66130756242111",
+                searchText = searchText
+            )
             if (response.isSuccessful) {
                 response.body()?.let { emit(LoadingEvent.Success(it)) }
             } else {
