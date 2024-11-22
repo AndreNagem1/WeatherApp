@@ -2,6 +2,7 @@ package praonde.com.wheatherapp.home.presentation.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,10 +23,11 @@ import praonde.com.uikit.theme.WeatherAppTheme
 import praonde.com.wheatherapp.R
 
 @Composable
-fun SearchListItem() {
+fun SearchListItem(onSearchListItemClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .padding(horizontal = 50.dp)
+            .fillMaxWidth()
+            .clickable { onSearchListItemClick() }
             .background(
                 color = WeatherAppTheme.colors.surface,
                 shape = RoundedCornerShape(16.dp)

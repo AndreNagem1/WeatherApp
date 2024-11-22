@@ -10,7 +10,10 @@ import androidx.compose.ui.unit.dp
 import praonde.com.wheatherapp.common.SubmitLoadingState
 
 @Composable
-fun HomeScreenContent(state: SubmitLoadingState<String>) {
+fun HomeScreenContent(
+    state: SubmitLoadingState<String>,
+    onSearchItemClick: (Int) -> Unit
+) {
 
     when (state) {
         SubmitLoadingState.Idle -> HomeIdleText()
@@ -23,13 +26,15 @@ fun HomeScreenContent(state: SubmitLoadingState<String>) {
 
         is SubmitLoadingState.Success -> {
             LazyColumn(
-                modifier = Modifier.padding(top = 32.dp)
+                modifier = Modifier.padding(top = 32.dp, start = 20.dp, end = 20.dp)
             ) {
                 items(listSearchItems.size) { index ->
                     if (index > 0) {
                         Spacer(modifier = Modifier.height(32.dp))
                     }
-                    SearchListItem()
+                    SearchListItem(
+                        onSearchListItemClick = { onSearchItemClick(index) }
+                    )
                 }
             }
         }

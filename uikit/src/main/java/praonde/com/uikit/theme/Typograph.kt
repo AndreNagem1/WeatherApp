@@ -42,7 +42,7 @@ internal val AppTypographyConst = AppTypography(
         fontFamily = Poppins,
         fontWeight = FontWeight.Medium,
         fontSize = 60.sp,
-        lineHeight = 105.sp,
+        lineHeight = 10.sp,
     ),
     displayLarge = TextStyle(
         fontFamily = Poppins,
