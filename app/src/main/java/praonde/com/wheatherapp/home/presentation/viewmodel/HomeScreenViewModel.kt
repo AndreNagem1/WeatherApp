@@ -24,7 +24,7 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
         showWeatherDetails
     ) { searchText, weatherDataValue, showWeatherDetails ->
 
-        if (searchText.equals("list")) {
+        if (searchText.isNotBlank()) {
             weatherData.value = SubmitLoadingState.Success("")
         }
 

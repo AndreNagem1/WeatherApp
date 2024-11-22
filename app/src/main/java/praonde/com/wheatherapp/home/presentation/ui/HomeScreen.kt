@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import praonde.com.uikit.commonUI.BaseScreen
@@ -18,6 +20,8 @@ import praonde.com.wheatherapp.home.presentation.viewmodel.HomeScreenViewModel
 @Composable
 fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
     val state = viewmodel.state.collectAsState()
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
 
     BaseScreen {
         SearchComponent(
@@ -37,6 +41,8 @@ fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
                 state = state.value.weatherDataSubmittable,
                 onSearchItemClick = { _ ->
                     viewmodel.onSearchItemClick()
+                    focusManager.clearFocus()
+                    keyboardController?.hide()
                 }
             )
         }
