@@ -84,5 +84,10 @@ dependencies {
     implementation(libs.androidX.hilt)
     kapt(libs.dagger.hilt.compiler)
 
+    // -- Retrofit -- //
+    implementation(libs.retrofit.lib)
+    implementation(libs.retrofit.gson)
+    implementation(libs.retrofit.interceptor)
+
     implementation(project(":uikit"))
 }

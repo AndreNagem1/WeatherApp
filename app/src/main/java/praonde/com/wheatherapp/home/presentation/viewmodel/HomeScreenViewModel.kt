@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import praonde.com.wheatherapp.common.SubmitLoadingState
+import praonde.com.wheatherapp.home.domain.WeatherRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor() : ViewModel() {
+class HomeScreenViewModel @Inject constructor(private val repository: WeatherRepository) : ViewModel() {
 
     private val showWeatherDetails = MutableStateFlow(false)
     private val searchText = MutableStateFlow("")
