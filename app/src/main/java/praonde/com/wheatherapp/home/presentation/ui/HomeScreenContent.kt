@@ -14,15 +14,9 @@ fun HomeScreenContent(
     state: SubmitLoadingState<String>,
     onSearchItemClick: (Int) -> Unit
 ) {
-
     when (state) {
+        SubmitLoadingState.Loading -> {}
         SubmitLoadingState.Idle -> HomeIdleText()
-
-        SubmitLoadingState.Loading -> {
-            WeatherStatus()
-            Spacer(modifier = Modifier.height(35.dp))
-            WeatherStatusRow()
-        }
 
         is SubmitLoadingState.Success -> {
             LazyColumn(

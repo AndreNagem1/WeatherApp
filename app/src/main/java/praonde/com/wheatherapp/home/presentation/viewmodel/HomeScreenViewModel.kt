@@ -13,15 +13,16 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor() : ViewModel() {
 
+    private val showWeatherDetails = MutableStateFlow(false)
     private val searchText = MutableStateFlow("")
     private val weatherData =
         MutableStateFlow<SubmitLoadingState<String>>(SubmitLoadingState.Idle)
 
-    val state = searchText.combine(weatherData) { searchText, weatherDataValue ->
-
-        if (searchText.isNotBlank()) {
-            weatherData.value = SubmitLoadingState.Loading
-        }
+    val state = combine(
+        searchText,
+        weatherData,
+        showWeatherDetails
+    ) { searchText, weatherDataValue, showWeatherDetails ->
 
         if (searchText.equals("list")) {
             weatherData.value = SubmitLoadingState.Success("")
@@ -29,7 +30,8 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
 
         HomeScreenState(
             searchText = searchText,
-            weatherDataSubmittable = if (searchText.isEmpty()) SubmitLoadingState.Idle else weatherDataValue
+            weatherDataSubmittable = if (searchText.isEmpty()) SubmitLoadingState.Idle else weatherDataValue,
+            showWeatherDetails = showWeatherDetails
         )
 
     }.stateIn(
@@ -37,11 +39,17 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
         SharingStarted.WhileSubscribed(),
         HomeScreenState(
             searchText = "",
-            weatherDataSubmittable = SubmitLoadingState.Idle
+            weatherDataSubmittable = SubmitLoadingState.Idle,
+            showWeatherDetails = false
         )
     )
 
     fun onSearchTextChange(newText: String) {
         searchText.value = newText
+        showWeatherDetails.value = false
+    }
+
+    fun onSearchItemClick() {
+        showWeatherDetails.value = true
     }
 }

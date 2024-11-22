@@ -1,7 +1,9 @@
 package praonde.com.wheatherapp.home.presentation.ui
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,7 +17,6 @@ import praonde.com.wheatherapp.home.presentation.viewmodel.HomeScreenViewModel
 
 @Composable
 fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
-    val context = LocalContext.current
     val state = viewmodel.state.collectAsState()
 
     BaseScreen {
@@ -27,11 +28,17 @@ fun HomeScreen(viewmodel: HomeScreenViewModel = hiltViewModel()) {
             onValueChange = viewmodel::onSearchTextChange
         )
 
-        HomeScreenContent(
-            state = state.value.weatherDataSubmittable,
-            onSearchItemClick = { index ->
-                Toast.makeText(context, "Search Item $index", Toast.LENGTH_SHORT).show()
-            }
-        )
+        if (state.value.showWeatherDetails) {
+            WeatherStatus()
+            Spacer(modifier = Modifier.height(35.dp))
+            WeatherStatusRow()
+        } else {
+            HomeScreenContent(
+                state = state.value.weatherDataSubmittable,
+                onSearchItemClick = { _ ->
+                    viewmodel.onSearchItemClick()
+                }
+            )
+        }
     }
 }

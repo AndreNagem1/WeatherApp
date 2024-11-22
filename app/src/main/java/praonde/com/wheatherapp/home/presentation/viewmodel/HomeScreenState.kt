@@ -5,4 +5,5 @@ import praonde.com.wheatherapp.common.SubmitLoadingState
 class HomeScreenState(
     val searchText: String,
     val weatherDataSubmittable: SubmitLoadingState<String>,
+    val showWeatherDetails: Boolean
 )
