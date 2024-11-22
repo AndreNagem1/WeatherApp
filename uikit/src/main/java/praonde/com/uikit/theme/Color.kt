@@ -9,6 +9,7 @@ data class WeatherAppColors(
     val background: Color,
     val surface: Color,
     val textLightColor: Color,
+    val textLightDarkColor: Color,
     val textDarkColor: Color
 )
 
@@ -17,5 +18,6 @@ internal val WeatherAppColorsPalette = WeatherAppColors(
     background = Color(0xFFFAFAFA),
     surface = Color(0xFFF2F2F2),
     textLightColor = Color(0xFFC4C4C4),
-    textDarkColor = Color(0xFF2C2C2C)
+    textDarkColor = Color(0xFF2C2C2C),
+    textLightDarkColor = Color(0xFF9A9A9A),
 )

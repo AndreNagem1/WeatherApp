@@ -23,8 +23,12 @@ private val Poppins = FontFamily(
 @Immutable
 data class AppTypography(
     val labelSmall: TextStyle,
+    val displayLarge: TextStyle,
+    val displaySemiLarge: TextStyle,
     val displayMedium: TextStyle,
+    val displaySemiMedium: TextStyle,
     val displaySmall: TextStyle,
+    val displayExtraSmall: TextStyle,
 )
 
 internal val AppTypographyConst = AppTypography(
@@ -34,16 +38,40 @@ internal val AppTypographyConst = AppTypography(
         fontSize = 15.sp,
         lineHeight = 22.5.sp,
     ),
+    displaySemiLarge = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Medium,
+        fontSize = 60.sp,
+        lineHeight = 105.sp,
+    ),
+    displayLarge = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Medium,
+        fontSize = 70.sp,
+        lineHeight = 105.sp,
+    ),
     displayMedium = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
         fontSize = 30.sp,
         lineHeight = 45.sp,
     ),
+    displaySemiMedium = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        lineHeight = 10.sp,
+    ),
     displaySmall = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
         fontSize = 15.sp,
         lineHeight = 22.5.sp,
+    ),
+    displayExtraSmall = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 12.sp,
+        lineHeight = 18.sp,
     ),
 )

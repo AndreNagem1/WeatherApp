@@ -6,4 +6,9 @@
     <string name="home_screen_idle_description">Please Search For A City</string>
 
 
+    <!-- Weather Status -->
+    <string name="weather_status_humidity">Humidity</string>
+    <string name="weather_status_uv">UV</string>
+    <string name="weather_status_feels_like">Feels Like</string>
+
 </resources>

@@ -17,11 +17,21 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
     private val weatherData =
         MutableStateFlow<SubmitLoadingState<String>>(SubmitLoadingState.Idle)
 
-    val state = searchText.combine(weatherData) { searchText, weatherData ->
+    val state = searchText.combine(weatherData) { searchText, weatherDataValue ->
+
+        if (searchText.isNotBlank()) {
+            weatherData.value = SubmitLoadingState.Loading
+        }
+
+        if (searchText.equals("list")) {
+            weatherData.value = SubmitLoadingState.Success("")
+        }
+
         HomeScreenState(
             searchText = searchText,
-            weatherDataSubmittable = weatherData
+            weatherDataSubmittable = if (searchText.isEmpty()) SubmitLoadingState.Idle else weatherDataValue
         )
+
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(),

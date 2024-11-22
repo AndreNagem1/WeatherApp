@@ -18,7 +18,7 @@ fun BaseScreen(
             modifier = Modifier
                 .background(WeatherAppTheme.colors.background)
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
         ) {
             content()
         }

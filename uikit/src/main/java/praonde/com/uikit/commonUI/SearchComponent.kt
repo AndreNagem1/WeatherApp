@@ -19,8 +19,8 @@ import wheatherapp.com.uikit.R
 @Composable
 fun SearchComponent(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedTextColor = WeatherAppTheme.colors.surface,
-        unfocusedTextColor = WeatherAppTheme.colors.surface,
+        focusedTextColor = WeatherAppTheme.colors.textDarkColor,
+        unfocusedTextColor = WeatherAppTheme.colors.textDarkColor,
         focusedBorderColor = WeatherAppTheme.colors.surface,
         unfocusedBorderColor = WeatherAppTheme.colors.surface,
         focusedContainerColor = WeatherAppTheme.colors.surface,
