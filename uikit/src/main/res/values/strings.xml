@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">uikit</string>
+    <!-- UIKIT -->
+    <string name="search_component_hint">Search Location</string>
+
 </resources>

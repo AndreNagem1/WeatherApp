@@ -1,12 +1,23 @@
 package praonde.com.wheatherapp.home.presentation.ui
 
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import praonde.com.uikit.commonUI.BaseScreen
+import praonde.com.uikit.commonUI.SearchComponent
 
 @Composable
 fun HomeScreen() {
     BaseScreen {
-        Text("HOME SCREEN")
+        SearchComponent(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 24.dp, top = 44.dp, end = 24.dp),
+            value = ""
+        ) { _ ->
+
+        }
     }
 }

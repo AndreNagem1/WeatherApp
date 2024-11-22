@@ -1,4 +1,7 @@
 package praonde.com.wheatherapp.home.presentation.viewmodel
 
-class HomeScreenViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeScreenViewModel : ViewModel() {
+
 }

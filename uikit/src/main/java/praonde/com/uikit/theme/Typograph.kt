@@ -21,18 +21,18 @@ private val Poppins = FontFamily(
 )
 
 @Immutable
-data class BsTypography(
-    val displayLage: TextStyle,
+data class AppTypography(
+    val labelSmall: TextStyle,
     val displayMedium: TextStyle,
     val displaySmall: TextStyle,
 )
 
-internal val AppTypographyConst = BsTypography(
-    displayLage = TextStyle(
+internal val AppTypographyConst = AppTypography(
+    labelSmall = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
-        fontSize = 54.sp,
-        lineHeight = 64.sp,
+        fontSize = 15.sp,
+        lineHeight = 22.5.sp,
     ),
     displayMedium = TextStyle(
         fontFamily = Poppins,

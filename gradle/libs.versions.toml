@@ -15,6 +15,9 @@ material_compose = '1.1.2'
 compose_extension = '1.5.10'
 composeNavigation = "2.8.0-alpha08"
 serialization = "1.6.3"
+daggerHilt = '2.48'
+androidX_hilt = '1.2.0'
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +49,11 @@ compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 
+# Dagger Hilt
+dagger_hilt_plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "daggerHilt" }
+dagger_hilt_android = { module = "com.google.dagger:hilt-android", version.ref = "daggerHilt" }
+dagger_hilt_compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "daggerHilt" }
+androidX_hilt = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidX_hilt" }
 
 
 [plugins]

@@ -28,11 +28,11 @@ fun WeatherAppThemeWrapper(
     }
 }
 
-object WeatherAppThemeWrapper {
+object WeatherAppTheme {
     val colors: WeatherAppColors
         @Composable
         get() = LocalAppColors.current
-    val typography: BsTypography
+    val typography: AppTypography
         @Composable
         get() = LocalAppTypography.current
 }
