@@ -2,8 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    id(libs.plugins.kapt.get().pluginId)
+    id(libs.plugins.hilt.get().pluginId) version "2.49" apply true
 }
-
+kapt {
+    correctErrorTypes = true
+}
+hilt {
+    enableAggregatingTask = false
+}
 android {
     namespace = "praonde.com.wheatherapp"
     compileSdk = 35
@@ -71,6 +78,11 @@ dependencies {
     // -- Navigation -- //
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    // -- Hilt -- //
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.androidX.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     implementation(project(":uikit"))
 }
