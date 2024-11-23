@@ -5,6 +5,9 @@
     <string name="home_screen_idle_title">No City Selected</string>
     <string name="home_screen_idle_description">Please Search For A City</string>
 
+    <!-- ScreenErrorMessage -->
+    <string name="screen_error_title">Something went wrong</string>
+    <string name="screen_error_description">Please, try again later</string>
 
     <!-- Weather Status -->
     <string name="weather_status_humidity">Humidity</string>

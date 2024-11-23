@@ -20,9 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import praonde.com.uikit.theme.WeatherAppTheme
 import praonde.com.wheatherapp.R
+import praonde.com.wheatherapp.common.toStringPercentage
+import praonde.com.wheatherapp.common.toStringTemp
 
 @Composable
-fun WeatherStatusRow() {
+fun WeatherStatusRow(humidity: Int, uv: Double, tempFeelsLike: Double) {
     Box(
         modifier = Modifier
             .padding(horizontal = 50.dp)
@@ -39,15 +41,15 @@ fun WeatherStatusRow() {
         ) {
             WeatherStatusRowItem(
                 title = stringResource(R.string.weather_status_humidity),
-                value = "20%"
+                value = humidity.toStringPercentage()
             )
             WeatherStatusRowItem(
                 title = stringResource(R.string.weather_status_uv),
-                value = "4"
+                value = uv.toString()
             )
             WeatherStatusRowItem(
                 title = stringResource(R.string.weather_status_feels_like),
-                value = "38°"
+                value = tempFeelsLike.toStringTemp()
             )
         }
     }
@@ -77,5 +79,9 @@ fun WeatherStatusRowItem(title: String, value: String) {
 @Preview(showBackground = true)
 @Composable
 fun WeatherStatusRowPreview() {
-    WeatherStatusRow()
+    WeatherStatusRow(
+        humidity = 28,
+        uv = 60.0,
+        tempFeelsLike = 30.0
+    )
 }

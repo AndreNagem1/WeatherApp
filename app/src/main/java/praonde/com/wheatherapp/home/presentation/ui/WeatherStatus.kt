@@ -1,6 +1,5 @@
 package praonde.com.wheatherapp.home.presentation.ui
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,9 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import praonde.com.uikit.theme.WeatherAppTheme
 import praonde.com.wheatherapp.R
+import praonde.com.wheatherapp.home.domain.model.Condition
 
 @Composable
-fun WeatherStatus() {
+fun WeatherStatus(condition: Condition, temp: Double) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +33,7 @@ fun WeatherStatus() {
     ) {
         Image(
             modifier = Modifier.size(123.dp),
-            painter = painterResource(R.drawable.status_sunny),
+            painter = painterResource(condition.resourceID),
             contentDescription = "WeatherStatusImage"
         )
         Spacer(modifier = Modifier.height(24.dp))
@@ -46,7 +46,7 @@ fun WeatherStatus() {
         ) {
             Text(
                 textAlign = TextAlign.Center,
-                text = "Hyderabad",
+                text = condition.description,
                 color = WeatherAppTheme.colors.textDarkColor,
                 style = WeatherAppTheme.typography.displayMedium
             )
@@ -66,7 +66,7 @@ fun WeatherStatus() {
         ) {
             Text(
                 textAlign = TextAlign.Center,
-                text = "31",
+                text = temp.toString(),
                 color = WeatherAppTheme.colors.textDarkColor,
                 style = WeatherAppTheme.typography.displayLarge
             )
@@ -83,5 +83,8 @@ fun WeatherStatus() {
 @Preview(showBackground = true)
 @Composable
 fun WeatherStatusPreview() {
-    WeatherStatus()
+    WeatherStatus(
+        condition = Condition.CONDITION_3,
+        temp = 22.23
+    )
 }

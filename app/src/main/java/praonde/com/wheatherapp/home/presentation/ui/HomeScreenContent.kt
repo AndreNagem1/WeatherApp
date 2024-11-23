@@ -1,41 +1,24 @@
 package praonde.com.wheatherapp.home.presentation.ui
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import praonde.com.uikit.theme.WeatherAppTheme
+import praonde.com.uikit.commonUI.LoadingComponent
+import praonde.com.uikit.commonUI.ScreenMessageComponent
+import praonde.com.wheatherapp.R
 import praonde.com.wheatherapp.common.LoadingEvent
-import praonde.com.wheatherapp.home.data.entity.PlaceEntity
+import praonde.com.wheatherapp.home.domain.model.PlaceInfo
 
 @Composable
 fun HomeScreenContent(
-    state: LoadingEvent<List<PlaceEntity>>,
+    state: LoadingEvent<List<PlaceInfo>>,
     onSearchItemClick: (Int) -> Unit
 ) {
     when (state) {
-        LoadingEvent.Loading -> {
-            Column(
-                modifier = Modifier
-                    .padding(top = 20.dp)
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(
-                    color = WeatherAppTheme.colors.textDarkColor
-                )
-            }
-        }
-
-        LoadingEvent.Idle -> HomeIdleText()
-
         is LoadingEvent.Success -> {
 
             LazyColumn(
@@ -48,13 +31,25 @@ fun HomeScreenContent(
                         Spacer(modifier = Modifier.height(32.dp))
                     }
                     SearchListItem(
-                        placeName = placeInfo.region,
-                        onSearchListItemClick = { onSearchItemClick(index) }
+                        placeName = placeInfo.name,
+                        onSearchListItemClick = { onSearchItemClick(placeInfo.id) }
                     )
                 }
             }
         }
 
-        else -> {}
+        LoadingEvent.Loading -> {
+            LoadingComponent()
+        }
+
+        LoadingEvent.Idle -> ScreenMessageComponent(
+            titleResource = R.string.home_screen_idle_title,
+            descriptionResource = R.string.home_screen_idle_description
+        )
+
+        is LoadingEvent.Error -> ScreenMessageComponent(
+            titleResource = R.string.home_screen_idle_title,
+            descriptionResource = R.string.home_screen_idle_description
+        )
     }
 }

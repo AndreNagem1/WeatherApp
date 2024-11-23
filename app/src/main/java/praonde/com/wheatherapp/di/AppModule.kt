@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import praonde.com.wheatherapp.home.data.remote.datastore.WeatherDataStore
 import praonde.com.wheatherapp.home.data.remote.service.WeatherService
 import praonde.com.wheatherapp.home.data.repository.WeatherRepositoryImpl
-import praonde.com.wheatherapp.home.domain.WeatherRepository
+import praonde.com.wheatherapp.home.domain.repository.WeatherRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton

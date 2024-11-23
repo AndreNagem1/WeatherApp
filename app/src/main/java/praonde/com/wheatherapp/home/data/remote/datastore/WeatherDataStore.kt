@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import praonde.com.wheatherapp.common.LoadingEvent
+import praonde.com.wheatherapp.home.data.entity.LocationDetailsEntity
 import praonde.com.wheatherapp.home.data.entity.PlaceEntity
 import praonde.com.wheatherapp.home.data.remote.service.WeatherService
 import javax.inject.Inject
@@ -15,14 +16,37 @@ class WeatherDataStore @Inject constructor(private val weatherService: WeatherSe
         return flow {
             emit(LoadingEvent.Loading)
             val response = weatherService.getAvailableLocations(
-                apiKey = "fa0f9c023c094469b66130756242111",
                 searchText = searchText
             )
             if (response.isSuccessful) {
                 response.body()?.let { emit(LoadingEvent.Success(it)) }
             } else {
-                throw Exception("Error fetching places: ${response.code()} ${response.message()}")
+                try {
+                    throw Exception("Error fetching places: ${response.code()} ${response.message()}")
+                } catch (e: Exception) {
+                    throw Exception("Error fetching places:")
+                }
             }
         }.flowOn(Dispatchers.IO)
+    }
+
+    fun getLocationDetails(locationID: Int): Flow<LoadingEvent<LocationDetailsEntity>> {
+        return flow {
+            emit(LoadingEvent.Loading)
+            val response = weatherService.getLocationDetails(
+                locationID = "id:$locationID"
+            )
+            if (response.isSuccessful) {
+                response.body()?.let { emit(LoadingEvent.Success(it)) }
+            } else {
+                try {
+                    throw Exception("Error location details: ${response.code()} ${response.message()}")
+                } catch (e: Exception) {
+                    throw Exception("Error locations details")
+                }
+            }
+
+        }.flowOn(Dispatchers.IO)
+
     }
 }

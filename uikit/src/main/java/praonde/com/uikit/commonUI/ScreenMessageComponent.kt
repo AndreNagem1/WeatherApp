@@ -1,4 +1,4 @@
-package praonde.com.wheatherapp.home.presentation.ui
+package praonde.com.uikit.commonUI
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,16 +9,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import praonde.com.uikit.theme.WeatherAppTheme
-import praonde.com.wheatherapp.R
 
 @Composable
-fun HomeIdleText() {
+fun ScreenMessageComponent(titleResource: Int, descriptionResource: Int) {
     Text(
         modifier = Modifier
             .padding(start = 48.dp, end = 48.dp, top = 240.dp)
             .fillMaxWidth(),
         textAlign = TextAlign.Center,
-        text = stringResource(R.string.home_screen_idle_title),
+        text = stringResource(titleResource),
         color = WeatherAppTheme.colors.textDarkColor,
         style = WeatherAppTheme.typography.displayMedium
     )
@@ -28,7 +27,7 @@ fun HomeIdleText() {
             .padding(start = 48.dp, end = 48.dp, top = 10.dp)
             .fillMaxWidth(),
         textAlign = TextAlign.Center,
-        text = stringResource(R.string.home_screen_idle_description),
+        text = stringResource(descriptionResource),
         color = WeatherAppTheme.colors.textDarkColor,
         style = WeatherAppTheme.typography.displaySmall
     )

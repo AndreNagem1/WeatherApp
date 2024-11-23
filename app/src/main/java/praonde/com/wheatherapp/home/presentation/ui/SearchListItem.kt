@@ -27,9 +27,9 @@ fun SearchListItem(
     placeName: String,
     onSearchListItemClick: () -> Unit
 ) {
-    val placeNameFormatted = if(placeName.length > 13){
+    val placeNameFormatted = if (placeName.length > 13) {
         placeName.substring(0, 10) + "..."
-    }else {
+    } else {
         placeName
     }
 
