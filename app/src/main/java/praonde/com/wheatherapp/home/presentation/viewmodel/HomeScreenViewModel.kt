@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
@@ -57,6 +58,9 @@ class HomeScreenViewModel @Inject constructor(private val repository: WeatherRep
 
         viewModelScope.launch {
             repository.getSearchPlaces(searchText = newText)
+                .catch { throwable ->
+                    listLocationsLoadingEvent.value = LoadingEvent.Error(Throwable(throwable))
+                }
                 .collectLatest { response ->
                     listLocationsLoadingEvent.value = response
                 }
@@ -68,6 +72,9 @@ class HomeScreenViewModel @Inject constructor(private val repository: WeatherRep
 
         viewModelScope.launch {
             repository.getLocationDetails(locationID = locationID)
+                .catch { throwable ->
+                    locationsDetailsLoadingEvent.value = LoadingEvent.Error(Throwable(throwable))
+                }
                 .collectLatest { response ->
                     locationsDetailsLoadingEvent.value = response
                 }

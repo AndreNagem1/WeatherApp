@@ -15,17 +15,17 @@ class WeatherDataStore @Inject constructor(private val weatherService: WeatherSe
     fun getAvailableLocations(searchText: String): Flow<LoadingEvent<List<PlaceEntity>>> {
         return flow {
             emit(LoadingEvent.Loading)
-            val response = weatherService.getAvailableLocations(
-                searchText = searchText
-            )
-            if (response.isSuccessful) {
-                response.body()?.let { emit(LoadingEvent.Success(it)) }
-            } else {
-                try {
+            try {
+                val response = weatherService.getAvailableLocations(
+                    searchText = searchText
+                )
+                if (response.isSuccessful) {
+                    response.body()?.let { emit(LoadingEvent.Success(it)) }
+                } else {
                     throw Exception("Error fetching places: ${response.code()} ${response.message()}")
-                } catch (e: Exception) {
-                    throw Exception("Error fetching places:")
                 }
+            } catch (e: Exception) {
+                throw Exception("Error fetching places")
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -33,17 +33,17 @@ class WeatherDataStore @Inject constructor(private val weatherService: WeatherSe
     fun getLocationDetails(locationID: Int): Flow<LoadingEvent<LocationDetailsEntity>> {
         return flow {
             emit(LoadingEvent.Loading)
-            val response = weatherService.getLocationDetails(
-                locationID = "id:$locationID"
-            )
-            if (response.isSuccessful) {
-                response.body()?.let { emit(LoadingEvent.Success(it)) }
-            } else {
-                try {
+            try {
+                val response = weatherService.getLocationDetails(
+                    locationID = "id:$locationID"
+                )
+                if (response.isSuccessful) {
+                    response.body()?.let { emit(LoadingEvent.Success(it)) }
+                } else {
                     throw Exception("Error location details: ${response.code()} ${response.message()}")
-                } catch (e: Exception) {
-                    throw Exception("Error locations details")
                 }
+            } catch (e: Exception) {
+                throw Exception("Error locations details")
             }
 
         }.flowOn(Dispatchers.IO)
